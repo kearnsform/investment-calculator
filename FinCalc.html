@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="FinCalc.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <title>Investment Calculator</title>
+</head>
+
+<body>
+    <h1 class="display-4 centered">Investment Calculator</h1><br>
+    <div class="container">
+        <button type="button" class="btn btn-primary centered" data-toggle="collapse" data-target="#info">Info</button>
+        <div id="info" class="collapse">
+            You can change which value to calculate. Click and drag a field marked with <span><i class="fa fa-hand-o-right" aria-hidden="true"></i></span> to the Result section.
+        </div>
+    </div><br>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3 class="centered">Inputs</h3>
+                <form action="" id="inputs">
+                    <div class="icon"><i class="fa fa-hand-o-right fa-lg" aria-hidden="true"></i></div>
+                    <div class="form-group col-8 calc-field" id="pvd">
+                        <label for="pv" id="pvl" draggable="true" ondragstart="drag(event)">Starting Amount</label>
+                        <input type="number" class="form-control" id="pv" placeholder="">
+                    </div>
+                    <div class="form-group col-8 calc-field" id="rd">
+                        <label for="r" id="rl" draggable="true" ondragstart="drag(event)">Rate of Return (%)</label>
+                        <input type="number" class="form-control" id="r" placeholder="">
+                    </div>
+                    <div class="form-group col-8 calc-field" id="pmtd">
+                        <label for="pmt" id="pmll" draggable="true" ondragstart="drag(event)">Contribution</label>
+                        <input type="number" class="form-control" id="pmt" placeholder="">
+                    </div>
+                    <div class="form-group col-8 calc-field" id="nd">
+                        <label for="n" id="nl" draggable="true" ondragstart="drag(event)">Number of Years</label>
+                        <input type="number" class="form-control" id="n" placeholder="">
+                    </div>
+                </form>
+                <div style="height:2px;"><br></div>
+                <form action="" id="fixedInputs">
+                    <div class="form-group col-8 calc-field" id="kd">
+                        <label for="k">Payment Frequency</label>
+                        <select class="form-control" id="k">
+                            <option>Annually</option>
+                            <option>Semiannually</option>
+                            <option>Quarterly</option>
+                            <option>Monthly</option>
+                        </select>
+                    </div>
+                    <br>
+                    <p>Contribute at the
+                        <span class="form-check form-check-inline" id="pd">
+                            <input type="radio" class="form-check-input" id="pb" name="contributionTime" checked>
+                            <label class="form-check-label" for="pb">beginning</label>
+                            
+                            <input type="radio" class="form-check-input" id="pe" name="contributionTime" >
+                            <label class="form-check-label" for="pe">end</label>
+                        </span>
+                    </p>
+                    <p>of each period.</p>
+                </form>
+            </div>
+            <div class="col-4 my-auto center-column">
+                <button type="button" class="btn btn-success btn-xl" id="calc" onclick="updateForm()">
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="col my-auto">
+                <h3 class="centered">Result</h3>
+                <form action="" id="output" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <div class="form-group col-8 calc-field " id="fvd">
+                        <label for="fv" id="fvl" draggable="true" ondragstart="drag(event)">Ending Amount</label>
+                        <input type="number" class="form-control" id="fv" placeholder="">
+                    </div>
+                </form>
+                <div id="errorMessage" hidden="true">Error message goes here.</div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+<script src="InvestmentValueCalculator.js"></script>
+<script src="FinCalc.js"></script>
+
+</html>
